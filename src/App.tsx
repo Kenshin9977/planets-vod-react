@@ -42,9 +42,25 @@ export default function SolarSystem() {
   };
 
   return (
-    <div style={{ display: "flex", width: "100%", justifyContent: "center", gap: "20px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "20px",
+        padding: "10px",
+        paddingBottom: "80px", // Pour laisser de l'espace pour le bouton fixe
+      }}
+    >
       {/* Zone Image + Astres */}
-      <div style={{ position: "relative", width: "70%", textAlign: "center" }}>
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          maxWidth: "600px",
+          textAlign: "center",
+        }}
+      >
         <img
           ref={imageRef}
           src="Vo-D-Solar-system.png"
@@ -64,7 +80,9 @@ export default function SolarSystem() {
                 width: `${(astre.coords.width / 100) * imageSize.width}px`,
                 height: `${(astre.coords.height / 100) * imageSize.height}px`,
                 background: "none",
-                border: selected.includes(astre.name) ? "4px solid rgba(120, 235, 255, 1)" : "2px solid rgba(120, 235, 255, 0.8)",
+                border: selected.includes(astre.name)
+                  ? "4px solid rgba(120, 235, 255, 1)"
+                  : "2px solid rgba(120, 235, 255, 0.8)",
                 borderRadius: "8px",
                 cursor: "pointer",
                 outline: "none",
@@ -75,8 +93,17 @@ export default function SolarSystem() {
           ))}
       </div>
 
-      {/* Liste des astres sélectionnés + Bouton reset */}
-      <div style={{ width: "20%", padding: "10px", border: "1px solid #ddd", borderRadius: "8px", textAlign: "center" }}>
+      {/* Liste des astres sélectionnés */}
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "400px",
+          padding: "10px",
+          border: "1px solid #ddd",
+          borderRadius: "8px",
+          textAlign: "center",
+        }}
+      >
         <h3 style={{ marginBottom: "10px" }}>Sélection</h3>
         {selected.length > 0 ? (
           <ol style={{ padding: "0", listStylePosition: "inside" }}>
@@ -89,24 +116,28 @@ export default function SolarSystem() {
         ) : (
           <p style={{ fontStyle: "italic", color: "#888" }}>Aucun astre sélectionné</p>
         )}
-
-        {/* Bouton reset */}
-        <button
-          onClick={resetSelection}
-          style={{
-            marginTop: "10px",
-            padding: "8px 16px",
-            backgroundColor: "#ff6f61",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            fontSize: "14px",
-          }}
-        >
-          Réinitialiser
-        </button>
       </div>
+
+      {/* Bouton réinitialiser fixe */}
+      <button
+        onClick={resetSelection}
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          padding: "8px 16px",
+          backgroundColor: "#ff6f61",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+          fontSize: "14px",
+          zIndex: 10,
+        }}
+      >
+        Réinitialiser
+      </button>
     </div>
   );
 }
